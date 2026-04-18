@@ -1,0 +1,159 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "WP-.#####",
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "booklet_number",
+  "status",
+  "first_coupon",
+  "last_coupon",
+  "total_coupons",
+  "consumed_count",
+  "remaining_count",
+  "batch_id",
+  "section_break_reserved",
+  "current_delivery_man",
+  "customer",
+  "sold_on",
+  "sales_invoice",
+  "depleted_on",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "booklet_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Booklet Number",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "In Stock",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "In Stock\nIn Custody\nSold\nDepleted",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "first_coupon",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "First Coupon",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_coupon",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Last Coupon",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "20",
+   "fieldname": "total_coupons",
+   "fieldtype": "Int",
+   "label": "Total Coupons",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "consumed_count",
+   "fieldtype": "Int",
+   "label": "Consumed",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "20",
+   "fieldname": "remaining_count",
+   "fieldtype": "Int",
+   "label": "Remaining",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "batch_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Batch ID"
+  },
+  {
+   "fieldname": "section_break_reserved",
+   "fieldtype": "Section Break",
+   "label": "Reserved Fields"
+  },
+  {
+   "fieldname": "current_delivery_man",
+   "fieldtype": "Link",
+   "label": "Current Delivery Man",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "sold_on",
+   "fieldtype": "Datetime",
+   "label": "Sold On"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "depleted_on",
+   "fieldtype": "Datetime",
+   "label": "Depleted On"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 0,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Coupon Booklet",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purisol Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "batch_id,status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

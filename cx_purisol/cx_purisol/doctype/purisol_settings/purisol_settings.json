@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "coupon_item",
+  "default_price_list",
+  "section_break_thresholds",
+  "customer_low_stock_threshold",
+  "warehouse_low_stock_threshold",
+  "section_break_accounts",
+  "employee_liability_account",
+  "discrepancy_offset_account",
+  "default_cash_account",
+  "section_break_warnings",
+  "enable_consumption_warnings"
+ ],
+ "fields": [
+  {
+   "fieldname": "coupon_item",
+   "fieldtype": "Link",
+   "label": "Coupon Item",
+   "options": "Item"
+  },
+  {
+   "default": "Standard Selling",
+   "fieldname": "default_price_list",
+   "fieldtype": "Link",
+   "label": "Default Price List",
+   "options": "Price List"
+  },
+  {
+   "fieldname": "section_break_thresholds",
+   "fieldtype": "Section Break",
+   "label": "Stock Thresholds"
+  },
+  {
+   "default": "3",
+   "fieldname": "customer_low_stock_threshold",
+   "fieldtype": "Int",
+   "label": "Customer Low-Stock Threshold",
+   "reqd": 1
+  },
+  {
+   "default": "5",
+   "fieldname": "warehouse_low_stock_threshold",
+   "fieldtype": "Int",
+   "label": "Warehouse Low-Stock Threshold",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_accounts",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "employee_liability_account",
+   "fieldtype": "Link",
+   "label": "Employee Liability Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "discrepancy_offset_account",
+   "fieldtype": "Link",
+   "label": "Discrepancy Offset Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_cash_account",
+   "fieldtype": "Link",
+   "label": "Default Cash Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "section_break_warnings",
+   "fieldtype": "Section Break",
+   "label": "Notifications"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_consumption_warnings",
+   "fieldtype": "Check",
+   "label": "Enable Consumption Warnings",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purisol Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

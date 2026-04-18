@@ -1,0 +1,17 @@
+# Specify Project Configuration
+# Auto-generated for cx_purisol
+
+project_name = "cx_purisol"
+ai_assistant = "claude"
+script_type = "sh"
+
+[directories]
+specs = "specs"
+docs = "docs"
+templates = ".specify/templates"
+scripts = ".specify/scripts"
+memory = ".specify/memory"
+
+[features]
+auto_commit = true
+merge_templates = true

@@ -1,0 +1,13 @@
+[
+ {
+  "doctype": "Role",
+  "name": "Purisol Administrator",
+  "role_name": "Purisol Administrator",
+  "desk_access": 1,
+  "disabled": 0,
+  "is_custom": 1,
+  "two_factor_auth": 0,
+  "restrict_to_domain": null,
+  "home_page": null
+ }
+]
