@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "PCE-.YYYY.-.#####",
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "entry_type",
+  "entry_datetime",
+  "from_delivery_man",
+  "to_delivery_man",
+  "created_by",
+  "notes",
+  "booklets"
+ ],
+ "fields": [
+  {
+   "fieldname": "entry_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Entry Type",
+   "options": "Assign\nTransfer\nReturn",
+   "reqd": 1
+  },
+  {
+   "default": "now",
+   "fieldname": "entry_datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Entry Date/Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_delivery_man",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Delivery Man",
+   "mandatory_depends_on": "eval:doc.entry_type == \"Transfer\" || doc.entry_type == \"Return\"",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "to_delivery_man",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Delivery Man",
+   "mandatory_depends_on": "eval:doc.entry_type == \"Assign\" || doc.entry_type == \"Transfer\"",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "booklets",
+   "fieldtype": "Table",
+   "label": "Booklets",
+   "options": "Purisol Custody Entry Booklet",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Custody Entry",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 0,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purisol Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "entry_type,from_delivery_man,to_delivery_man",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

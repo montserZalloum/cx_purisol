@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "coupon",
+  "coupon_number",
+  "booklet",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "coupon",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Coupon",
+   "options": "Purisol Coupon",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "coupon.coupon_number",
+   "fieldname": "coupon_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coupon Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "coupon.booklet",
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Coupon Discrepancy Coupon",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

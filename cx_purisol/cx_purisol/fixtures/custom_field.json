@@ -1,0 +1,17 @@
+[
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice Item-purisol_booklet",
+    "dt": "Sales Invoice Item",
+    "fieldname": "purisol_booklet",
+    "label": "Purisol Booklet",
+    "fieldtype": "Link",
+    "options": "Purisol Coupon Booklet",
+    "insert_after": "item_code",
+    "in_list_view": 1,
+    "read_only_depends_on": "eval:doc.parent && doc.docstatus==1",
+    "no_copy": 1,
+    "allow_on_submit": 0,
+    "translatable": 0
+  }
+]

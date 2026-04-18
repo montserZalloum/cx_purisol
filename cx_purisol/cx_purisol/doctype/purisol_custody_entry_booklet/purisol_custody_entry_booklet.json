@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "booklet",
+  "booklet_status_at_entry",
+  "delivery_man_at_entry"
+ ],
+ "fields": [
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "booklet_status_at_entry",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Status at Entry",
+   "read_only": 1,
+   "reqd": 0
+  },
+  {
+   "fieldname": "delivery_man_at_entry",
+   "fieldtype": "Link",
+   "label": "Delivery Man at Entry",
+   "options": "Employee",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Custody Entry Booklet",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

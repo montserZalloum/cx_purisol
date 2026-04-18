@@ -3,6 +3,8 @@ from frappe.tests.utils import FrappeTestCase
 
 from cx_purisol.cx_purisol.api.booklet_generation import purisol_generate_booklets
 
+test_ignore = ["Customer", "Employee", "Purisol Coupon Consumption Entry", "Sales Invoice", "Purisol Coupon Booklet"]
+
 
 class TestPurisolCoupon(FrappeTestCase):
     def setUp(self):
@@ -42,12 +44,41 @@ class TestPurisolCoupon(FrappeTestCase):
         doc.page_number = 5
         self.assertRaises(frappe.ValidationError, doc.save)
 
-    def test_status_only_available(self):
-        result = self._generate(1)
-        booklet_name = result["first_booklet"]
-        coupon_name = frappe.get_value(
-            "Purisol Coupon", {"booklet": booklet_name, "page_number": 1}, "name"
+    def _get_coupon(self, booklet_name, page=1):
+        name = frappe.get_value(
+            "Purisol Coupon", {"booklet": booklet_name, "page_number": page}, "name"
         )
-        doc = frappe.get_doc("Purisol Coupon", coupon_name)
-        doc.status = "Consumed"
-        self.assertRaises(frappe.ValidationError, doc.save)
+        return frappe.get_doc("Purisol Coupon", name)
+
+    def test_available_to_consumed_permitted(self):
+        result = self._generate(1)
+        coupon = self._get_coupon(result["first_booklet"])
+        frappe.db.set_value("Purisol Coupon", coupon.name, "status", "Consumed")
+        reloaded = frappe.get_doc("Purisol Coupon", coupon.name)
+        self.assertEqual(reloaded.status, "Consumed")
+
+    def test_consumed_to_available_permitted(self):
+        result = self._generate(1)
+        coupon = self._get_coupon(result["first_booklet"])
+        frappe.db.set_value("Purisol Coupon", coupon.name, "status", "Consumed")
+        doc = frappe.get_doc("Purisol Coupon", coupon.name)
+        doc.status = "Available"
+        doc.save(ignore_permissions=True)
+        self.assertEqual(doc.status, "Available")
+
+    def test_disallowed_target_status_raises(self):
+        result = self._generate(1)
+        coupon = self._get_coupon(result["first_booklet"])
+        doc = frappe.get_doc("Purisol Coupon", coupon.name)
+        doc.status = "In Stock"
+        with self.assertRaises(frappe.ValidationError) as ctx:
+            doc.save(ignore_permissions=True)
+        self.assertIn("not allowed", str(ctx.exception))
+
+    def test_frozen_field_still_rejected_when_status_unchanged(self):
+        result = self._generate(1)
+        coupon = self._get_coupon(result["first_booklet"])
+        doc = frappe.get_doc("Purisol Coupon", coupon.name)
+        doc.page_number = 5
+        with self.assertRaises(frappe.ValidationError):
+            doc.save(ignore_permissions=True)

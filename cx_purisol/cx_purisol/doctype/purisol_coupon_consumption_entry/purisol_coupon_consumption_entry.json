@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "PCC-.YYYY.-.#####",
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "posting_time",
+  "delivery_man",
+  "received_by",
+  "section_break_coupons",
+  "coupons",
+  "total_coupons",
+  "section_break_reserved",
+  "has_warnings",
+  "discrepancies_detected",
+  "section_break_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "default": "now",
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Delivery Man",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "received_by",
+   "fieldtype": "Link",
+   "label": "Received By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_coupons",
+   "fieldtype": "Section Break",
+   "label": "Consumed Coupons"
+  },
+  {
+   "fieldname": "coupons",
+   "fieldtype": "Table",
+   "label": "Coupons",
+   "options": "Purisol Coupon Consumption Item",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_coupons",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Coupons",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_reserved",
+   "fieldtype": "Section Break",
+   "label": "Reserved (Phase 5)"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_warnings",
+   "fieldtype": "Check",
+   "label": "Has Warnings",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discrepancies_detected",
+   "fieldtype": "Table",
+   "label": "Discrepancies Detected",
+   "options": "Purisol Coupon Discrepancy Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Coupon Consumption Entry",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purisol Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "delivery_man,posting_date",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

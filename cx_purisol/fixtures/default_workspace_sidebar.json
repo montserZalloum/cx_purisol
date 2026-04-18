@@ -1,0 +1,86 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Default Workspace Sidebar",
+  "modified": "2026-04-18 18:22:35.244613",
+  "name": "مياه نبع النعيم",
+  "sidebar_links": [
+   {
+    "color": null,
+    "doc_view": "",
+    "icon": null,
+    "is_custom": 0,
+    "is_default": 0,
+    "kanban_board": null,
+    "label": "Coupon",
+    "link_to": "Purisol Coupon",
+    "link_type": "DocType",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "sidebar_links",
+    "parenttype": "Default Workspace Sidebar",
+    "stats_filter": null
+   },
+   {
+    "color": null,
+    "doc_view": "",
+    "icon": null,
+    "is_custom": 0,
+    "is_default": 0,
+    "kanban_board": null,
+    "label": "Coupon Booklet",
+    "link_to": "Purisol Coupon Booklet",
+    "link_type": "DocType",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "sidebar_links",
+    "parenttype": "Default Workspace Sidebar",
+    "stats_filter": null
+   },
+   {
+    "color": null,
+    "doc_view": "",
+    "icon": null,
+    "is_custom": 0,
+    "is_default": 0,
+    "kanban_board": null,
+    "label": "Custody Entry",
+    "link_to": "Purisol Custody Entry",
+    "link_type": "DocType",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "sidebar_links",
+    "parenttype": "Default Workspace Sidebar",
+    "stats_filter": null
+   },
+   {
+    "color": null,
+    "doc_view": "",
+    "icon": null,
+    "is_custom": 0,
+    "is_default": 0,
+    "kanban_board": null,
+    "label": "Custody Entry Booklet",
+    "link_to": "Purisol Custody Entry Booklet",
+    "link_type": "DocType",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "sidebar_links",
+    "parenttype": "Default Workspace Sidebar",
+    "stats_filter": null
+   },
+   {
+    "color": null,
+    "doc_view": "",
+    "icon": null,
+    "is_custom": 0,
+    "is_default": 0,
+    "kanban_board": null,
+    "label": "Settings",
+    "link_to": "Purisol Settings",
+    "link_type": "DocType",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "sidebar_links",
+    "parenttype": "Default Workspace Sidebar",
+    "stats_filter": null
+   }
+  ],
+  "workspace": "مياه نبع النعيم"
+ }
+]

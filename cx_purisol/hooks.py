@@ -169,7 +169,7 @@ app_license = "mit"
 # Testing
 # -------
 
-# before_tests = "cx_purisol.install.before_tests"
+before_tests = "cx_purisol.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
@@ -251,5 +251,26 @@ app_license = "mit"
 # --------
 fixtures = [
 	{"dt": "Role", "filters": [["name", "in", ["Purisol Administrator"]]]},
+	{"dt": "Custom Field", "filters": [["name", "in", ["Sales Invoice Item-purisol_booklet"]]]},
+	{"dt": "Workspace", "filters": [["name", "in", ["مياه نبع النعيم"]]]},
+	{"dt": "Default Workspace Sidebar", "filters": [["name", "in", ["مياه نبع النعيم"]]]},
 ]
+
+doc_events = {
+	"Sales Invoice": {
+		"validate": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.validate_booklet_lines",
+		"on_submit": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.mark_booklets_sold",
+		"on_cancel": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.reverse_booklets_sale",
+		"on_trash": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.guard_trash",
+	}
+}
+
+doctype_js = {
+	"Purisol Coupon Discrepancy": "public/js/purisol_coupon_discrepancy.js",
+}
+
+doctype_list_js = {
+	"Purisol Coupon Booklet": "public/js/purisol_coupon_booklet_list.js",
+	"Purisol Coupon Discrepancy": "public/js/purisol_coupon_discrepancy_list.js",
+}
 

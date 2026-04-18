@@ -1,0 +1,229 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "PCD-.YYYY.-.#####",
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "discrepancy_type",
+  "status",
+  "opened_on",
+  "resolved_on",
+  "section_break_detection",
+  "triggering_consumption_entry",
+  "booklet",
+  "customer",
+  "section_break_coupons",
+  "affected_coupons",
+  "section_break_related",
+  "related_delivery_men",
+  "section_break_resolution",
+  "liable_delivery_man",
+  "estimated_amount",
+  "resolution_action",
+  "resolution_notes",
+  "section_break_links",
+  "journal_entry",
+  "payment_entry",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "Open",
+   "fieldname": "discrepancy_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Discrepancy Type",
+   "options": "Missing Coupons\nUnassigned Booklet",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nUnder Review\nResolved - Admin Error\nResolved - Delivery Man Liable\nResolved - Paid",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "opened_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Opened On",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "resolved_on",
+   "fieldtype": "Datetime",
+   "label": "Resolved On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_detection",
+   "fieldtype": "Section Break",
+   "label": "Detection Context"
+  },
+  {
+   "fieldname": "triggering_consumption_entry",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Triggering Consumption Entry",
+   "options": "Purisol Coupon Consumption Entry",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_coupons",
+   "fieldtype": "Section Break",
+   "label": "Affected Coupons"
+  },
+  {
+   "fieldname": "affected_coupons",
+   "fieldtype": "Table",
+   "label": "Affected Coupons",
+   "options": "Purisol Coupon Discrepancy Coupon",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_related",
+   "fieldtype": "Section Break",
+   "label": "Related Delivery Men"
+  },
+  {
+   "fieldname": "related_delivery_men",
+   "fieldtype": "Table",
+   "label": "Related Delivery Men",
+   "options": "Purisol Coupon Discrepancy Related Person",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_resolution",
+   "fieldtype": "Section Break",
+   "label": "Resolution"
+  },
+  {
+   "fieldname": "liable_delivery_man",
+   "fieldtype": "Link",
+   "label": "Liable Delivery Man",
+   "options": "Employee"
+  },
+  {
+   "default": "0",
+   "fieldname": "estimated_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Estimated Amount"
+  },
+  {
+   "fieldname": "resolution_action",
+   "fieldtype": "Select",
+   "label": "Resolution Action",
+   "options": "\nNone\nAdd to Liability Ledger\nImmediate Cash Payment"
+  },
+  {
+   "fieldname": "resolution_notes",
+   "fieldtype": "Small Text",
+   "label": "Resolution Notes"
+  },
+  {
+   "fieldname": "section_break_links",
+   "fieldtype": "Section Break",
+   "label": "Linked Documents"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "options": "Journal Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "label": "Payment Entry",
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Purisol Coupon Discrepancy",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Coupon Discrepancy",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 0,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purisol Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 0,
+   "write": 0
+  }
+ ],
+ "search_fields": "booklet,customer,discrepancy_type",
+ "sort_field": "opened_on",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "name",
+ "track_changes": 1
+}

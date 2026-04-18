@@ -1,0 +1,62 @@
+{
+ "actions": [],
+ "creation": "2026-04-18 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "delivery_man",
+  "role",
+  "custody_entry",
+  "consumption_entry",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Delivery Man",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Role",
+   "options": "Custody Holder\nSubmitted Adjacent Coupons",
+   "reqd": 1
+  },
+  {
+   "fieldname": "custody_entry",
+   "fieldtype": "Link",
+   "label": "Custody Entry",
+   "options": "Purisol Custody Entry"
+  },
+  {
+   "fieldname": "consumption_entry",
+   "fieldtype": "Link",
+   "label": "Consumption Entry",
+   "options": "Purisol Coupon Consumption Entry"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "issingle": 0,
+ "links": [],
+ "modified": "2026-04-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Purisol Coupon Discrepancy Related Person",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
