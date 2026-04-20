@@ -1,12 +1,36 @@
 [
  {
   "charts": [
-   {"chart_name": "Purisol \u2014 In-Custody Breakdown"},
-   {"chart_name": "Purisol \u2014 Today's Consumption"},
-   {"chart_name": "Purisol \u2014 Outstanding Liabilities"},
-   {"chart_name": "Purisol \u2014 Customers Low on Coupons"}
+   {
+    "chart_name": "Purisol — In-Custody Breakdown",
+    "label": null,
+    "parent": "مياه نبع النعيم",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   },
+   {
+    "chart_name": "Purisol — Today's Consumption",
+    "label": null,
+    "parent": "مياه نبع النعيم",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   },
+   {
+    "chart_name": "Purisol — Outstanding Liabilities",
+    "label": null,
+    "parent": "مياه نبع النعيم",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   },
+   {
+    "chart_name": "Purisol — Customers Low on Coupons",
+    "label": null,
+    "parent": "مياه نبع النعيم",
+    "parentfield": "charts",
+    "parenttype": "Workspace"
+   }
   ],
-  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Operations\",\"level\":4},\"id\":\"operations-header\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol \u2014 Booklets In Stock\",\"col\":3},\"id\":\"c1\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol \u2014 Booklets In Custody\",\"col\":3},\"id\":\"c2\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol \u2014 Active Sold Booklets\",\"col\":3},\"id\":\"c3\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol \u2014 In-Custody Breakdown\",\"col\":6},\"id\":\"g2b\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol \u2014 Today's Consumption\",\"col\":6},\"id\":\"g7\"},{\"type\":\"spacer\",\"data\":{},\"id\":\"s1\"},{\"type\":\"header\",\"data\":{\"text\":\"Customer Follow-up\",\"level\":4},\"id\":\"follow-up-header\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol \u2014 Customers Low on Coupons\",\"col\":6},\"id\":\"g4\"},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Depleted Booklets\",\"col\":6},\"id\":\"ql8\"},{\"type\":\"spacer\",\"data\":{},\"id\":\"s2\"},{\"type\":\"header\",\"data\":{\"text\":\"Risk Watchlist\",\"level\":4},\"id\":\"risk-header\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol \u2014 Open Discrepancies\",\"col\":3},\"id\":\"c5a\"},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Open Discrepancies\",\"col\":5},\"id\":\"ql5b\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol \u2014 Outstanding Liabilities\",\"col\":4},\"id\":\"g6\"}]",
+  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Operations\",\"level\":4},\"id\":\"operations-header\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol — Booklets In Stock\",\"col\":3},\"id\":\"c1\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol — Booklets In Custody\",\"col\":3},\"id\":\"c2\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol — Active Sold Booklets\",\"col\":3},\"id\":\"c3\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol — In-Custody Breakdown\",\"col\":6},\"id\":\"g2b\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol — Today's Consumption\",\"col\":6},\"id\":\"g7\"},{\"type\":\"spacer\",\"data\":{},\"id\":\"s1\"},{\"type\":\"header\",\"data\":{\"text\":\"Customer Follow-up\",\"level\":4},\"id\":\"follow-up-header\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol — Customers Low on Coupons\",\"col\":6},\"id\":\"g4\"},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Depleted Booklets\",\"col\":6},\"id\":\"ql8\"},{\"type\":\"spacer\",\"data\":{},\"id\":\"s2\"},{\"type\":\"header\",\"data\":{\"text\":\"Risk Watchlist\",\"level\":4},\"id\":\"risk-header\"},{\"type\":\"card\",\"data\":{\"card_name\":\"Purisol — Open Discrepancies\",\"col\":3},\"id\":\"c5a\"},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Open Discrepancies\",\"col\":5},\"id\":\"ql5b\"},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Purisol — Outstanding Liabilities\",\"col\":4},\"id\":\"g6\"}]",
   "custom_blocks": [],
   "docstatus": 0,
   "doctype": "Workspace",
@@ -17,31 +41,68 @@
   "is_hidden": 0,
   "label": "مياه نبع النعيم",
   "links": [],
-  "modified": "2026-04-19 00:00:00.000000",
+  "modified": "2026-04-19 00:00:00",
   "module": null,
   "name": "مياه نبع النعيم",
   "number_cards": [
-   {"number_card_name": "Purisol \u2014 Booklets In Stock"},
-   {"number_card_name": "Purisol \u2014 Booklets In Custody"},
-   {"number_card_name": "Purisol \u2014 Active Sold Booklets"},
-   {"number_card_name": "Purisol \u2014 Open Discrepancies"}
+   {
+    "label": null,
+    "number_card_name": "Purisol — Booklets In Stock",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   },
+   {
+    "label": null,
+    "number_card_name": "Purisol — Booklets In Custody",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   },
+   {
+    "label": null,
+    "number_card_name": "Purisol — Active Sold Booklets",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   },
+   {
+    "label": null,
+    "number_card_name": "Purisol — Open Discrepancies",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "number_cards",
+    "parenttype": "Workspace"
+   }
   ],
   "parent_page": "",
   "public": 1,
   "quick_lists": [
    {
     "document_type": "Purisol Coupon Discrepancy",
-    "filters_json": "[[\"status\",\"=\",\"Open\"]]",
-    "label": "Open Discrepancies"
+    "label": "Open Discrepancies",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "quick_lists",
+    "parenttype": "Workspace",
+    "quick_list_filter": null
    },
    {
     "document_type": "Purisol Coupon Booklet",
-    "filters_json": "[[\"status\",\"=\",\"Depleted\"],[\"depleted_on\",\">=\",\"[Today - 7d]\"]]",
-    "label": "Recent Depleted Booklets"
+    "label": "Recent Depleted Booklets",
+    "parent": "مياه نبع النعيم",
+    "parentfield": "quick_lists",
+    "parenttype": "Workspace",
+    "quick_list_filter": null
    }
   ],
   "restrict_to_domain": null,
-  "roles": [{"role": "Purisol Administrator"}],
+  "roles": [
+   {
+    "parent": "مياه نبع النعيم",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "Purisol Administrator"
+   }
+  ],
   "sequence_id": 40.0,
   "shortcuts": [],
   "title": "مياه نبع النعيم"

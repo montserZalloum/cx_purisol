@@ -36,6 +36,13 @@ tests/
 
 cd src [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] pytest [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] ruff check .
 
+### Fixture Management
+
+```bash
+# Export all fixtures to JSON (run after adding/changing any fixture record in the UI)
+cd /home/corex/aurevia-bench && bench --site x.conanacademy.com export-fixtures --app cx_purisol
+```
+
 ## Code Style
 
 Python 3.10+ (Frappe server), JavaScript (Frappe client scripts).: Follow standard conventions
