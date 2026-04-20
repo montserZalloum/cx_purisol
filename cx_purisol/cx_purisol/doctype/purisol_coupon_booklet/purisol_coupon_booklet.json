@@ -1,8 +1,7 @@
 {
  "actions": [],
- "allow_rename": 0,
  "autoname": "WP-.#####",
- "creation": "2026-04-18 00:00:00.000000",
+ "creation": "2026-04-18 00:00:00",
  "doctype": "DocType",
  "document_type": "Document",
  "engine": "InnoDB",
@@ -128,45 +127,38 @@
    "label": "Notes"
   }
  ],
- "index_web_pages_for_search": 0,
- "is_submittable": 0,
- "issingle": 0,
  "links": [],
- "modified": "2026-04-18 00:00:00.000000",
- "modified_by": "Administrator",
+ "modified": "2026-04-19 00:00:48.427994",
+ "modified_by": "zmontsaer@gmail.com",
  "module": "Cx Purisol",
  "name": "Purisol Coupon Booklet",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
-   "create": 0,
-   "delete": 0,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Purisol Administrator",
-   "share": 1,
-   "write": 1
+   "share": 1
   },
   {
-   "create": 0,
-   "delete": 0,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
+   "share": 1
   }
  ],
+ "row_format": "Dynamic",
  "search_fields": "batch_id,status",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "workspace": "مياه نبع النعيم"
 }

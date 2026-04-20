@@ -224,6 +224,6 @@
  "sort_field": "opened_on",
  "sort_order": "DESC",
  "states": [],
- "title_field": "name",
- "track_changes": 1
+ "track_changes": 1,
+ "workspace": "مياه نبع النعيم"
 }

@@ -1,0 +1,87 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Sale Date",
+   "width": 120
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "width": 150
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "width": 180
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Invoice",
+   "options": "Sales Invoice",
+   "width": 180
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "width": 120
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Invoice Status",
+   "width": 130
+  }
+ ],
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price List",
+   "options": "Price List"
+  }
+ ],
+ "is_standard": "Yes",
+ "modified": "2026-04-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Booklet Sales Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    si.posting_date,\n    sii.purisol_booklet AS booklet,\n    si.customer,\n    si.name AS sales_invoice,\n    sii.amount,\n    si.status\nFROM `tabSales Invoice Item` sii\nJOIN `tabSales Invoice` si ON si.name = sii.parent\nWHERE si.docstatus = 1\n  AND sii.purisol_booklet IS NOT NULL\n  AND (%(from_date)s IS NULL OR si.posting_date >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR si.posting_date <= %(to_date)s)\n  AND (%(customer)s IS NULL OR si.customer = %(customer)s)\n  AND (%(price_list)s IS NULL OR %(price_list)s = '' OR si.selling_price_list = %(price_list)s)\nORDER BY si.posting_date DESC, si.name, sii.idx",
+ "ref_doctype": "Sales Invoice",
+ "report_name": "Booklet Sales Report",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}

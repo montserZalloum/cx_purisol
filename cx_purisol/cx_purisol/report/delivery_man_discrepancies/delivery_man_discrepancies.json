@@ -1,0 +1,105 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "discrepancy",
+   "fieldtype": "Link",
+   "label": "Discrepancy ID",
+   "options": "Purisol Coupon Discrepancy",
+   "width": 220
+  },
+  {
+   "fieldname": "opened_on",
+   "fieldtype": "Datetime",
+   "label": "Opened On",
+   "width": 160
+  },
+  {
+   "fieldname": "discrepancy_type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "width": 160
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "width": 150
+  },
+  {
+   "fieldname": "coupons_count",
+   "fieldtype": "Int",
+   "label": "Coupons",
+   "width": 90
+  },
+  {
+   "fieldname": "estimated_amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "width": 120
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status",
+   "width": 200
+  },
+  {
+   "fieldname": "resolution_action",
+   "fieldtype": "Data",
+   "label": "Resolution",
+   "width": 180
+  },
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "label": "Delivery Man",
+   "options": "Employee",
+   "width": 180
+  }
+ ],
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "label": "Delivery Man",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nOpen\nUnder Review\nResolved - Admin Error\nResolved - Delivery Man Liable\nResolved - Paid"
+  }
+ ],
+ "is_standard": "Yes",
+ "modified": "2026-04-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Delivery Man Discrepancies",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    d.name AS discrepancy,\n    d.opened_on,\n    d.discrepancy_type,\n    d.booklet,\n    (SELECT COUNT(*) FROM `tabPurisol Coupon Discrepancy Coupon` dc WHERE dc.parent = d.name) AS coupons_count,\n    d.estimated_amount,\n    d.status,\n    d.resolution_action,\n    cce.delivery_man\nFROM `tabPurisol Coupon Discrepancy` d\nLEFT JOIN `tabPurisol Coupon Consumption Entry` cce ON cce.name = d.triggering_consumption_entry\nWHERE d.docstatus = 1\n  AND (cce.name IS NULL OR cce.docstatus = 1)\n  AND (%(from_date)s IS NULL OR DATE(d.opened_on) >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR DATE(d.opened_on) <= %(to_date)s)\n  AND (%(delivery_man)s IS NULL OR cce.delivery_man = %(delivery_man)s)\n  AND (%(status)s IS NULL OR %(status)s = '' OR d.status = %(status)s)\nORDER BY d.opened_on DESC",
+ "ref_doctype": "Purisol Coupon Discrepancy",
+ "report_name": "Delivery Man Discrepancies",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}

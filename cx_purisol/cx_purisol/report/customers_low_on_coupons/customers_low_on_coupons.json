@@ -1,0 +1,22 @@
+{
+ "add_total_row": 0,
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "modified": "2026-04-19 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Customers Low on Coupons",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT customer, total_remaining\nFROM (\n    SELECT\n        b.customer,\n        SUM(b.remaining_count) AS total_remaining\n    FROM `tabPurisol Coupon Booklet` b\n    WHERE b.status = 'Sold'\n      AND b.customer IS NOT NULL\n    GROUP BY b.customer\n) agg\nWHERE total_remaining <= COALESCE(\n    (SELECT CAST(value AS UNSIGNED) FROM `tabSingles` WHERE doctype = 'Purisol Settings' AND field = 'customer_low_stock_threshold'),\n    3\n)\nORDER BY total_remaining ASC\nLIMIT 10",
+ "ref_doctype": "Purisol Coupon Booklet",
+ "report_name": "Customers Low on Coupons",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}

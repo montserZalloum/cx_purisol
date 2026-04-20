@@ -91,7 +91,7 @@ def _detect_unassigned_booklets(entry) -> list[str]:
 
         booklet_doc = booklet_cache[booklet_name]
 
-        if booklet_doc.status != "Sold":
+        if booklet_doc.status not in ("Sold", "Depleted"):
             disc_name = _build_and_insert_discrepancy(
                 discrepancy_type="Unassigned Booklet",
                 triggering_entry=entry,

@@ -15,7 +15,8 @@
   "discrepancy_offset_account",
   "default_cash_account",
   "section_break_warnings",
-  "enable_consumption_warnings"
+  "enable_consumption_warnings",
+  "last_warehouse_low_stock_notified_on"
  ],
  "fields": [
   {
@@ -84,6 +85,13 @@
    "fieldtype": "Check",
    "label": "Enable Consumption Warnings",
    "reqd": 1
+  },
+  {
+   "fieldname": "last_warehouse_low_stock_notified_on",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Last Warehouse Low-Stock Notified On",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 0,
@@ -124,5 +132,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "workspace": "مياه نبع النعيم"
 }

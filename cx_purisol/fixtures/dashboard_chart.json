@@ -1,0 +1,55 @@
+[
+ {
+  "cache": 0,
+  "chart_name": "In-Custody Breakdown",
+  "chart_type": "Group By",
+  "doctype": "Dashboard Chart",
+  "document_type": "Purisol Coupon Booklet",
+  "filters_json": "[[\"Purisol Coupon Booklet\",\"status\",\"=\",\"In Custody\"]]",
+  "group_by_based_on": "current_delivery_man",
+  "group_by_type": "Count",
+  "is_public": 1,
+  "name": "Purisol \u2014 In-Custody Breakdown",
+  "type": "Bar"
+ },
+ {
+  "cache": 0,
+  "chart_name": "Today's Consumption",
+  "chart_type": "Report",
+  "doctype": "Dashboard Chart",
+  "dynamic_filters_json": "{\"from_date\":\"frappe.datetime.get_today()\",\"to_date\":\"frappe.datetime.get_today()\"}",
+  "filters_json": "[]",
+  "is_public": 1,
+  "name": "Purisol \u2014 Today's Consumption",
+  "report_name": "Daily Delivery Man Summary",
+  "type": "Bar",
+  "x_field": "delivery_man",
+  "y_axis": [{"color": "#449CF0", "y_field": "coupons_submitted"}]
+ },
+ {
+  "cache": 0,
+  "chart_name": "Outstanding Liabilities",
+  "chart_type": "Report",
+  "doctype": "Dashboard Chart",
+  "filters_json": "[]",
+  "is_public": 1,
+  "name": "Purisol \u2014 Outstanding Liabilities",
+  "report_name": "Delivery Man Liability Balance",
+  "type": "Bar",
+  "x_field": "delivery_man",
+  "y_axis": [{"color": "#E24C4C", "y_field": "open_balance"}]
+ },
+ {
+  "cache": 0,
+  "chart_name": "Customers Low on Coupons",
+  "chart_type": "Report",
+  "doctype": "Dashboard Chart",
+  "filters_json": "[]",
+  "is_public": 1,
+  "name": "Purisol \u2014 Customers Low on Coupons",
+  "report_name": "Customers Low on Coupons",
+  "type": "Bar",
+  "x_field": "customer",
+  "y_axis": [{"color": "#FFA00A", "y_field": "total_remaining"}]
+ }
+]

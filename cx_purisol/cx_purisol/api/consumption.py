@@ -18,16 +18,18 @@ def list_available_coupons(booklet):
 @frappe.whitelist()
 def resolve_coupons(coupon_numbers):
     frappe.only_for("Purisol Administrator")
-    filtered = [n.strip() for n in (coupon_numbers or []) if n.strip()]
+    if isinstance(coupon_numbers, str):
+        coupon_numbers = frappe.parse_json(coupon_numbers)
+    filtered = [n.strip() for n in (coupon_numbers or []) if isinstance(n, str) and n.strip()]
     if not filtered:
         frappe.throw(_("No coupon numbers to resolve."))
 
     coupon_rows = frappe.get_all(
         "Purisol Coupon",
         filters={"name": ["in", filtered]},
-        fields=["name", "booklet"],
+        fields=["name", "booklet", "status"],
     )
-    coupon_map = {r["name"]: r["booklet"] for r in coupon_rows}
+    coupon_map = {r["name"]: r for r in coupon_rows}
 
     booklet_names = list({r["booklet"] for r in coupon_rows if r["booklet"]})
     booklet_rows = frappe.get_all(
@@ -41,8 +43,14 @@ def resolve_coupons(coupon_numbers):
     unresolved = []
     for n in filtered:
         if n in coupon_map:
-            b = coupon_map[n]
-            resolved.append({"coupon": n, "booklet": b, "customer": booklet_map.get(b, "")})
+            row = coupon_map[n]
+            b = row["booklet"]
+            resolved.append({
+                "coupon": n,
+                "booklet": b,
+                "customer": booklet_map.get(b, ""),
+                "status": row["status"],
+            })
         else:
             unresolved.append(n)
 

@@ -1,0 +1,44 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "width": 200
+  },
+  {
+   "fieldname": "booklets_depleted",
+   "fieldtype": "Int",
+   "label": "Booklets Depleted",
+   "width": 140
+  },
+  {
+   "fieldname": "avg_days_to_deplete",
+   "fieldtype": "Float",
+   "label": "Avg Days to Deplete",
+   "width": 160
+  }
+ ],
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "modified": "2026-04-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Customer Consumption Rate",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    b.customer,\n    COUNT(*) AS booklets_depleted,\n    ROUND(AVG(DATEDIFF(b.depleted_on, b.sold_on)), 1) AS avg_days_to_deplete\nFROM `tabPurisol Coupon Booklet` b\nWHERE b.status = 'Depleted'\n  AND b.depleted_on IS NOT NULL\n  AND b.sold_on IS NOT NULL\n  AND b.customer IS NOT NULL\nGROUP BY b.customer\nORDER BY avg_days_to_deplete ASC",
+ "ref_doctype": "Purisol Coupon Booklet",
+ "report_name": "Customer Consumption Rate",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}

@@ -10,6 +10,40 @@ class PurisolCouponDiscrepancy(Document):
         if not self.opened_on:
             self.opened_on = frappe.utils.now_datetime()
 
+    def after_insert(self):
+        """Phase 6 US1: notify Purisol Administrator users on discrepancy open.
+
+        Runs inside the caller's transaction (typically the Consumption Entry
+        on_submit via Phase-5 detection, or a direct seed_open_discrepancy).
+        A raise propagates and rolls the whole stack back.
+        """
+        from cx_purisol.cx_purisol.api import notify
+
+        delivery_man = (
+            frappe.db.get_value(
+                "Purisol Coupon Consumption Entry",
+                self.triggering_consumption_entry,
+                "delivery_man",
+            )
+            if self.triggering_consumption_entry
+            else None
+        )
+
+        notify.send(
+            recipient="Purisol Administrator",
+            subject=_("Discrepancy {0} opened").format(self.name),
+            message=_(
+                "Discrepancy {0} opened: {1} in booklet {2}, delivery man {3}."
+            ).format(
+                self.name,
+                _(self.discrepancy_type or ""),
+                self.booklet or _("(unknown)"),
+                delivery_man or _("(unknown)"),
+            ),
+            reference_doctype="Purisol Coupon Discrepancy",
+            reference_name=self.name,
+        )
+
     def validate(self):
         prior = self.get_doc_before_save()
         if prior is None:
@@ -82,6 +116,8 @@ class PurisolCouponDiscrepancy(Document):
                 errors.append(_("Employee liability account is not configured in Purisol Settings."))
             if not settings.discrepancy_offset_account:
                 errors.append(_("Discrepancy offset account is not configured in Purisol Settings."))
+            if not self.estimated_amount or self.estimated_amount <= 0:
+                errors.append(_("Estimated Amount must be greater than zero for 'Add to Liability Ledger'."))
             if errors:
                 frappe.throw("<br>".join(errors))
             je = _create_liability_journal_entry(self)
@@ -97,6 +133,8 @@ class PurisolCouponDiscrepancy(Document):
                 errors.append(_("Discrepancy offset account is not configured in Purisol Settings."))
             if not settings.default_cash_account:
                 errors.append(_("Default cash account is not configured in Purisol Settings."))
+            if not self.estimated_amount or self.estimated_amount <= 0:
+                errors.append(_("Estimated Amount must be greater than zero for 'Immediate Cash Payment'."))
             if errors:
                 frappe.throw("<br>".join(errors))
             pe = _create_cash_payment_entry(self)

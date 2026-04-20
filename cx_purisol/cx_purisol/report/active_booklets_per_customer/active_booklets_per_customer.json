@@ -1,0 +1,76 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "width": 180
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "width": 150
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status",
+   "width": 100
+  },
+  {
+   "fieldname": "consumed_count",
+   "fieldtype": "Int",
+   "label": "Consumed",
+   "width": 100
+  },
+  {
+   "fieldname": "remaining_count",
+   "fieldtype": "Int",
+   "label": "Remaining",
+   "width": 100
+  },
+  {
+   "fieldname": "sold_on",
+   "fieldtype": "Date",
+   "label": "Sold On",
+   "width": 120
+  },
+  {
+   "fieldname": "days_since_sale",
+   "fieldtype": "Int",
+   "label": "Days Since Sale",
+   "width": 130
+  }
+ ],
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  }
+ ],
+ "is_standard": "Yes",
+ "modified": "2026-04-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Active Booklets per Customer",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    b.customer,\n    b.name AS booklet,\n    b.status,\n    b.consumed_count,\n    b.remaining_count,\n    b.sold_on,\n    DATEDIFF(NOW(), b.sold_on) AS days_since_sale\nFROM `tabPurisol Coupon Booklet` b\nWHERE b.status IN ('Sold', 'Depleted')\n  AND b.customer IS NOT NULL\n  AND (%(customer)s IS NULL OR %(customer)s = '' OR b.customer = %(customer)s)\nORDER BY b.customer, b.sold_on DESC",
+ "ref_doctype": "Purisol Coupon Booklet",
+ "report_name": "Active Booklets per Customer",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}

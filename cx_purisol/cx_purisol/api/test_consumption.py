@@ -106,6 +106,14 @@ class TestResolveCoupons(FrappeTestCase):
         c = self._coupons1[0]
         frappe.db.set_value("Purisol Coupon", c, {"status": "Consumed"}, update_modified=False)
         result = resolve_coupons([c])
-        resolved_names = [r["coupon"] for r in result["resolved"]]
-        self.assertIn(c, resolved_names)
+        consumed_row = next((r for r in result["resolved"] if r["coupon"] == c), None)
+        self.assertIsNotNone(consumed_row)
+        self.assertEqual(consumed_row["status"], "Consumed")
         self.assertEqual(result["unresolved"], [])
+
+    def test_resolved_row_includes_available_status(self):
+        c = self._coupons1[0]
+        result = resolve_coupons([c])
+        row = next((r for r in result["resolved"] if r["coupon"] == c), None)
+        self.assertIsNotNone(row)
+        self.assertEqual(row["status"], "Available")

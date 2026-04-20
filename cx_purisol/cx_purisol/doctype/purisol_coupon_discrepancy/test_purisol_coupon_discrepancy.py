@@ -14,9 +14,11 @@ from frappe.tests.utils import FrappeTestCase
 
 from cx_purisol.cx_purisol.tests.fixtures import (
     configure_purisol_settings_accounts,
+    count_notifications,
     ensure_customer,
     make_booklet_in_stock,
     make_employee,
+    seed_administrator_user,
     seed_open_discrepancy,
 )
 
@@ -516,3 +518,77 @@ class TestCashPaymentResolution(FrappeTestCase):
             settings.default_cash_account = orig_dca
             settings.save(ignore_permissions=True)
             frappe.clear_cache()
+
+
+class TestDiscrepancyAfterInsertNotification(FrappeTestCase):
+    """Phase 6 US1: after_insert fires one Notification Log per enabled admin."""
+
+    def setUp(self):
+        frappe.set_user("Administrator")
+
+    def test_after_insert_fires_notification(self):
+        admin = seed_administrator_user("p6-us1-admin@example.com")
+        booklet = make_booklet_in_stock().name
+
+        before = count_notifications(
+            for_user=admin,
+            doctype="Purisol Coupon Discrepancy",
+        )
+
+        disc_name = seed_open_discrepancy(
+            discrepancy_type="Missing Coupons",
+            booklet=booklet,
+            estimated_amount=10.0,
+        )
+
+        after = count_notifications(
+            for_user=admin,
+            doctype="Purisol Coupon Discrepancy",
+            document_name=disc_name,
+        )
+        self.assertEqual(after, 1)
+
+        total_after = count_notifications(
+            for_user=admin,
+            doctype="Purisol Coupon Discrepancy",
+        )
+        self.assertEqual(total_after, before + 1)
+
+    def test_after_insert_no_admin_silent(self):
+        # Disable all admin users so the role expands to an empty recipient set.
+        admin_rows = frappe.get_all(
+            "Has Role",
+            filters={"role": "Purisol Administrator", "parenttype": "User"},
+            fields=["parent"],
+        )
+        enabled_users = [
+            r["parent"]
+            for r in admin_rows
+            if frappe.db.get_value("User", r["parent"], "enabled")
+        ]
+        for u in enabled_users:
+            frappe.db.set_value("User", u, "enabled", 0)
+
+        booklet = make_booklet_in_stock().name
+        before_total = count_notifications(doctype="Purisol Coupon Discrepancy")
+
+        try:
+            disc_name = seed_open_discrepancy(
+                discrepancy_type="Missing Coupons",
+                booklet=booklet,
+                estimated_amount=10.0,
+            )
+            self.assertTrue(frappe.db.exists("Purisol Coupon Discrepancy", disc_name))
+
+            after_total = count_notifications(
+                doctype="Purisol Coupon Discrepancy",
+                document_name=disc_name,
+            )
+            self.assertEqual(after_total, 0)
+            self.assertEqual(
+                count_notifications(doctype="Purisol Coupon Discrepancy"),
+                before_total,
+            )
+        finally:
+            for u in enabled_users:
+                frappe.db.set_value("User", u, "enabled", 1)

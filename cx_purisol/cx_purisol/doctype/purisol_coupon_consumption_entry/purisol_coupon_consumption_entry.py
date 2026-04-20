@@ -2,6 +2,8 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
+from cx_purisol.cx_purisol.api import notify
+
 
 class PurisolCouponConsumptionEntry(Document):
     @property
@@ -18,10 +20,23 @@ class PurisolCouponConsumptionEntry(Document):
             frappe.throw(_("Consumption Entry must list at least one coupon."))
 
         seen = set()
+        booklet_customer_cache: dict[str, str | None] = {}
         for row in self.coupons:
             if row.coupon in seen:
                 frappe.throw(_("Coupon {0} appears more than once in this entry.").format(row.coupon))
             seen.add(row.coupon)
+
+            # Backfill booklet/customer from the coupon so downstream count updates
+            # and notifications in on_submit can't silently skip booklets when the
+            # client omits these fetch_from fields (e.g. Mode A before the fix).
+            if not row.booklet:
+                row.booklet = frappe.db.get_value("Purisol Coupon", row.coupon, "booklet")
+            if row.booklet and not row.customer:
+                if row.booklet not in booklet_customer_cache:
+                    booklet_customer_cache[row.booklet] = frappe.db.get_value(
+                        "Purisol Coupon Booklet", row.booklet, "customer"
+                    )
+                row.customer = booklet_customer_cache[row.booklet]
 
         # has_warnings and discrepancies_detected are controller-owned — populated by detect_for_entry in on_submit.
 
@@ -76,6 +91,28 @@ class PurisolCouponConsumptionEntry(Document):
             if triggered_depletion:
                 booklet.add_comment("Info", _("Depleted via {0}").format(self.name))
 
+                # Phase 6 US4: Booklet Depleted notification.
+                customer_name = (
+                    (
+                        frappe.db.get_value(
+                            "Customer", booklet.customer, "customer_name"
+                        )
+                        if booklet.customer
+                        else None
+                    )
+                    or booklet.customer
+                    or _("(unknown)")
+                )
+                notify.send(
+                    recipient="Purisol Administrator",
+                    subject=_("Booklet {0} depleted").format(booklet.name),
+                    message=_(
+                        "Booklet {0} for customer {1} is fully consumed. Follow up for resale."
+                    ).format(booklet.name, customer_name),
+                    reference_doctype="Purisol Coupon Booklet",
+                    reference_name=booklet.name,
+                )
+
         # Phase 5: detect discrepancies and append to discrepancies_detected.
         from cx_purisol.cx_purisol.api.discrepancy import detect_for_entry
 
@@ -83,10 +120,52 @@ class PurisolCouponConsumptionEntry(Document):
         if created_names:
             self.has_warnings = 1
             for name in created_names:
-                self.append("discrepancies_detected", {"discrepancy": name})
+                disc_type = frappe.db.get_value(
+                    "Purisol Coupon Discrepancy", name, "discrepancy_type"
+                )
+                self.append(
+                    "discrepancies_detected",
+                    {"discrepancy": name, "discrepancy_type": disc_type},
+                )
             self.db_update()
             for row in self.discrepancies_detected:
                 row.db_insert()
+
+        # Phase 6 US2: Customer Low Stock evaluation.
+        affected_customers = {
+            frappe.db.get_value("Purisol Coupon Booklet", b, "customer")
+            for b in booklets
+        }
+        affected_customers.discard(None)
+        affected_customers.discard("")
+
+        if affected_customers:
+            threshold = (
+                frappe.get_doc("Purisol Settings").customer_low_stock_threshold or 0
+            )
+            for customer in affected_customers:
+                total_remaining = frappe.db.sql(
+                    """
+                    SELECT COALESCE(SUM(remaining_count), 0)
+                    FROM `tabPurisol Coupon Booklet`
+                    WHERE customer = %s AND status = 'Sold'
+                    """,
+                    (customer,),
+                )[0][0] or 0
+                if total_remaining <= threshold:
+                    customer_name = (
+                        frappe.db.get_value("Customer", customer, "customer_name")
+                        or customer
+                    )
+                    notify.send(
+                        recipient="Purisol Administrator",
+                        subject=_("Customer {0} low on coupons").format(customer_name),
+                        message=_(
+                            "Customer {0} has {1} coupons remaining. Prepare a new booklet."
+                        ).format(customer_name, int(total_remaining)),
+                        reference_doctype="Customer",
+                        reference_name=customer,
+                    )
 
     def on_cancel(self):
         for row in self.coupons:

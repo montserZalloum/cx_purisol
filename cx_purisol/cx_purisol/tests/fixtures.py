@@ -341,3 +341,68 @@ def make_booklet_with_consumed_coupons(customer, employee, consumed_pages=(1, 2)
 def make_in_stock_booklet():
     """Create and return an In Stock (unsold) Purisol Coupon Booklet for US2 scenarios."""
     return make_booklet_in_stock()
+
+
+# ---------------------------------------------------------------------------
+# Phase 6 helpers
+# ---------------------------------------------------------------------------
+
+
+def seed_administrator_user(email, name=None):
+    """Idempotently create a User + Has Role row for the Purisol Administrator role.
+
+    Returns the User name (email).  Safe to call repeatedly within a single test.
+    """
+    if not frappe.db.exists("User", email):
+        user = frappe.get_doc({
+            "doctype": "User",
+            "email": email,
+            "first_name": name or email.split("@")[0],
+            "send_welcome_email": 0,
+            "enabled": 1,
+            "user_type": "System User",
+        })
+        user.insert(ignore_permissions=True)
+    else:
+        user = frappe.get_doc("User", email)
+        if not user.enabled:
+            user.enabled = 1
+            user.save(ignore_permissions=True)
+
+    has_role = frappe.db.exists(
+        "Has Role",
+        {"parent": email, "parenttype": "User", "role": "Purisol Administrator"},
+    )
+    if not has_role:
+        user = frappe.get_doc("User", email)
+        user.append("roles", {"role": "Purisol Administrator"})
+        user.save(ignore_permissions=True)
+
+    return email
+
+
+def count_notifications(
+    for_user=None, doctype=None, document_name=None, subject_contains=None
+):
+    """Count Notification Log rows matching the given filters.
+
+    All arguments are optional; omit for a sitewide count.  Used for delta-based
+    assertions (count_before → count_after) in Phase-6 tests.
+    """
+    filters: dict = {}
+    if for_user is not None:
+        filters["for_user"] = for_user
+    if doctype is not None:
+        filters["document_type"] = doctype
+    if document_name is not None:
+        filters["document_name"] = document_name
+    if subject_contains is not None:
+        filters["subject"] = ["like", f"%{subject_contains}%"]
+    return frappe.db.count("Notification Log", filters)
+
+
+def reset_warehouse_dedup():
+    """Clear Purisol Settings.last_warehouse_low_stock_notified_on between tests."""
+    frappe.db.set_single_value(
+        "Purisol Settings", "last_warehouse_low_stock_notified_on", None
+    )

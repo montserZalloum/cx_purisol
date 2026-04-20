@@ -1,0 +1,47 @@
+[
+ {
+  "cache": 0,
+  "doctype": "Number Card",
+  "document_type": "Purisol Coupon Booklet",
+  "filters_json": "[[\"Purisol Coupon Booklet\",\"status\",\"=\",\"In Stock\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "label": "Booklets In Stock",
+  "name": "Purisol \u2014 Booklets In Stock",
+  "type": "Document Type"
+ },
+ {
+  "cache": 0,
+  "doctype": "Number Card",
+  "document_type": "Purisol Coupon Booklet",
+  "filters_json": "[[\"Purisol Coupon Booklet\",\"status\",\"=\",\"In Custody\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "label": "Booklets In Custody",
+  "name": "Purisol \u2014 Booklets In Custody",
+  "type": "Document Type"
+ },
+ {
+  "cache": 0,
+  "doctype": "Number Card",
+  "document_type": "Purisol Coupon Booklet",
+  "filters_json": "[[\"Purisol Coupon Booklet\",\"status\",\"=\",\"Sold\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "label": "Active Sold Booklets",
+  "name": "Purisol \u2014 Active Sold Booklets",
+  "type": "Document Type"
+ },
+ {
+  "cache": 0,
+  "color": "Red",
+  "doctype": "Number Card",
+  "document_type": "Purisol Coupon Discrepancy",
+  "filters_json": "[[\"Purisol Coupon Discrepancy\",\"status\",\"=\",\"Open\"]]",
+  "function": "Count",
+  "is_public": 1,
+  "label": "Open Discrepancies",
+  "name": "Purisol \u2014 Open Discrepancies",
+  "type": "Document Type"
+ }
+]

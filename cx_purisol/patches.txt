@@ -8,3 +8,7 @@ cx_purisol.patches.v0_2_0.widen_booklet_validate_allowed_states
 cx_purisol.patches.v0_3_0.widen_booklet_validate_for_sale
 cx_purisol.patches.v0_4_0.widen_states_for_consumption
 cx_purisol.patches.v0_5_0.relax_consumption_entry_reserved_guards
+cx_purisol.patches.v0_6_0.add_warehouse_low_stock_dedup_field
+cx_purisol.patches.v0_7_0.add_phase_7_reports
+cx_purisol.patches.v0_8_0.add_dashboard_widgets
+cx_purisol.patches.v0_9_0.set_employee_link_title

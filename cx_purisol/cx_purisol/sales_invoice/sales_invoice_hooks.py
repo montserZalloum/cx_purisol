@@ -123,3 +123,43 @@ def guard_trash(doc, method=None):
         frappe.throw(
             _("Cannot delete — booklets still reference this invoice. Cancel the invoice first.")
         )
+
+
+def check_warehouse_low_stock(doc, method=None):
+    """Phase 6 US3: after a Sales Invoice submit, alert admins if warehouse stock is low.
+
+    Fires at most once per calendar day (dedup via
+    Purisol Settings.last_warehouse_low_stock_notified_on).  Runs as a secondary
+    on_submit hook after mark_booklets_sold so the in-stock count reflects the
+    post-submit state.
+    """
+    from cx_purisol.cx_purisol.api import notify
+
+    settings = frappe.get_doc("Purisol Settings")
+    threshold = settings.warehouse_low_stock_threshold or 0
+
+    in_stock_count = frappe.db.count("Purisol Coupon Booklet", {"status": "In Stock"})
+
+    if in_stock_count >= threshold:
+        return
+
+    today_date = frappe.utils.getdate()
+    last_notified = settings.last_warehouse_low_stock_notified_on
+    if last_notified and frappe.utils.getdate(last_notified) == today_date:
+        return
+
+    notify.send(
+        recipient="Purisol Administrator",
+        subject=_("Warehouse low on booklet stock"),
+        message=_("Only {0} booklets remain in stock. Generate a new batch.").format(
+            int(in_stock_count)
+        ),
+        reference_doctype="Purisol Coupon Booklet",
+        reference_name=None,
+    )
+
+    frappe.db.set_single_value(
+        "Purisol Settings",
+        "last_warehouse_low_stock_notified_on",
+        frappe.utils.today(),
+    )

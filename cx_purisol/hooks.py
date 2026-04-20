@@ -60,9 +60,9 @@ app_license = "mit"
 # home_page = "login"
 
 # website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
+role_home_page = {
+	"Purisol Administrator": "مياه نبع النعيم",
+}
 
 # Generators
 # ----------
@@ -83,12 +83,12 @@ app_license = "mit"
 # ------------
 
 # before_install = "cx_purisol.install.before_install"
-# after_install = "cx_purisol.install.after_install"
+after_install = "cx_purisol.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "cx_purisol.uninstall.before_uninstall"
+before_uninstall = "cx_purisol.install.before_uninstall"
 # after_uninstall = "cx_purisol.uninstall.after_uninstall"
 
 # Integration Setup
@@ -254,12 +254,27 @@ fixtures = [
 	{"dt": "Custom Field", "filters": [["name", "in", ["Sales Invoice Item-purisol_booklet"]]]},
 	{"dt": "Workspace", "filters": [["name", "in", ["مياه نبع النعيم"]]]},
 	{"dt": "Default Workspace Sidebar", "filters": [["name", "in", ["مياه نبع النعيم"]]]},
+	{"dt": "Number Card", "filters": [["name", "in", [
+		"Purisol — Booklets In Stock",
+		"Purisol — Booklets In Custody",
+		"Purisol — Active Sold Booklets",
+		"Purisol — Open Discrepancies",
+	]]]},
+	{"dt": "Dashboard Chart", "filters": [["name", "in", [
+		"Purisol — In-Custody Breakdown",
+		"Purisol — Customers Low on Coupons",
+		"Purisol — Outstanding Liabilities",
+		"Purisol — Today's Consumption",
+	]]]},
 ]
 
 doc_events = {
 	"Sales Invoice": {
 		"validate": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.validate_booklet_lines",
-		"on_submit": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.mark_booklets_sold",
+		"on_submit": [
+			"cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.mark_booklets_sold",
+			"cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.check_warehouse_low_stock",
+		],
 		"on_cancel": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.reverse_booklets_sale",
 		"on_trash": "cx_purisol.cx_purisol.sales_invoice.sales_invoice_hooks.guard_trash",
 	}

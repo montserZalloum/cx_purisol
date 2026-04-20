@@ -1,0 +1,95 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "consumed_on",
+   "fieldtype": "Datetime",
+   "label": "Consumed On",
+   "width": 160
+  },
+  {
+   "fieldname": "coupon",
+   "fieldtype": "Link",
+   "label": "Coupon",
+   "options": "Purisol Coupon",
+   "width": 130
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet",
+   "width": 150
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "width": 150
+  },
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "label": "Delivery Man",
+   "options": "Employee",
+   "width": 180
+  },
+  {
+   "fieldname": "consumption_entry",
+   "fieldtype": "Link",
+   "label": "Entry",
+   "options": "Purisol Coupon Consumption Entry",
+   "width": 160
+  }
+ ],
+ "creation": "2026-04-19 00:00:00.000000",
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "delivery_man",
+   "fieldtype": "Link",
+   "label": "Delivery Man",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "booklet",
+   "fieldtype": "Link",
+   "label": "Booklet",
+   "options": "Purisol Coupon Booklet"
+  }
+ ],
+ "is_standard": "Yes",
+ "modified": "2026-04-19 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cx Purisol",
+ "name": "Coupon Consumption Log",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    c.consumed_on,\n    c.name AS coupon,\n    c.booklet,\n    b.customer,\n    c.consumed_by_delivery_man AS delivery_man,\n    c.consumption_entry\nFROM `tabPurisol Coupon` c\nJOIN `tabPurisol Coupon Booklet` b ON b.name = c.booklet\nJOIN `tabPurisol Coupon Consumption Entry` cce ON cce.name = c.consumption_entry\nWHERE c.status = 'Consumed'\n  AND cce.docstatus = 1\n  AND (%(from_date)s IS NULL OR DATE(c.consumed_on) >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR DATE(c.consumed_on) <= %(to_date)s)\n  AND (%(delivery_man)s IS NULL OR c.consumed_by_delivery_man = %(delivery_man)s)\n  AND (%(customer)s IS NULL OR b.customer = %(customer)s)\n  AND (%(booklet)s IS NULL OR c.booklet = %(booklet)s)\nORDER BY c.consumed_on DESC, c.name",
+ "ref_doctype": "Purisol Coupon",
+ "report_name": "Coupon Consumption Log",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Purisol Administrator"
+  }
+ ]
+}
