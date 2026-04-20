@@ -49,7 +49,7 @@ frappe.ui.form.on("Purisol Coupon Consumption Entry", {
 
 function _build_mode_section(frm) {
 	const $section = $(`<div class="purisol-mode-section" style="padding:12px 15px 0"></div>`);
-	frm.get_field("notes").$wrapper.closest(".form-section").before($section);
+	$(frm.wrapper).find('[data-fieldname="section_break_coupons"]').before($section);
 
 	// Mode switcher
 	const $switcher = $(`

@@ -2,15 +2,18 @@
  {
   "cache": 0,
   "chart_name": "In-Custody Breakdown",
-  "chart_type": "Group By",
+  "chart_type": "Report",
   "doctype": "Dashboard Chart",
-  "document_type": "Purisol Coupon Booklet",
-  "filters_json": "[[\"Purisol Coupon Booklet\",\"status\",\"=\",\"In Custody\"]]",
-  "group_by_based_on": "current_delivery_man",
-  "group_by_type": "Count",
+  "document_type": null,
+  "filters_json": "[]",
+  "group_by_based_on": null,
+  "group_by_type": null,
   "is_public": 1,
   "name": "Purisol \u2014 In-Custody Breakdown",
-  "type": "Bar"
+  "report_name": "In-Custody Breakdown by Delivery Man",
+  "type": "Bar",
+  "x_field": "employee_name",
+  "y_axis": [{"color": "#449CF0", "y_field": "booklet_count"}]
  },
  {
   "cache": 0,
@@ -23,7 +26,7 @@
   "name": "Purisol \u2014 Today's Consumption",
   "report_name": "Daily Delivery Man Summary",
   "type": "Bar",
-  "x_field": "delivery_man",
+  "x_field": "employee_name",
   "y_axis": [{"color": "#449CF0", "y_field": "coupons_submitted"}]
  },
  {
