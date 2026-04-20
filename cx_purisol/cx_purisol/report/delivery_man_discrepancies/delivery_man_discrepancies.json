@@ -93,10 +93,9 @@
  "name": "Delivery Man Discrepancies",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "SELECT\n    d.name AS discrepancy,\n    d.opened_on,\n    d.discrepancy_type,\n    d.booklet,\n    (SELECT COUNT(*) FROM `tabPurisol Coupon Discrepancy Coupon` dc WHERE dc.parent = d.name) AS coupons_count,\n    d.estimated_amount,\n    d.status,\n    d.resolution_action,\n    cce.delivery_man\nFROM `tabPurisol Coupon Discrepancy` d\nLEFT JOIN `tabPurisol Coupon Consumption Entry` cce ON cce.name = d.triggering_consumption_entry\nWHERE d.docstatus = 1\n  AND (cce.name IS NULL OR cce.docstatus = 1)\n  AND (%(from_date)s IS NULL OR DATE(d.opened_on) >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR DATE(d.opened_on) <= %(to_date)s)\n  AND (%(delivery_man)s IS NULL OR cce.delivery_man = %(delivery_man)s)\n  AND (%(status)s IS NULL OR %(status)s = '' OR d.status = %(status)s)\nORDER BY d.opened_on DESC",
  "ref_doctype": "Purisol Coupon Discrepancy",
  "report_name": "Delivery Man Discrepancies",
- "report_type": "Query Report",
+ "report_type": "Script Report",
  "roles": [
   {
    "role": "Purisol Administrator"

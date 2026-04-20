@@ -83,10 +83,9 @@
  "name": "Coupon Consumption Log",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "SELECT\n    c.consumed_on,\n    c.name AS coupon,\n    c.booklet,\n    b.customer,\n    c.consumed_by_delivery_man AS delivery_man,\n    c.consumption_entry\nFROM `tabPurisol Coupon` c\nJOIN `tabPurisol Coupon Booklet` b ON b.name = c.booklet\nJOIN `tabPurisol Coupon Consumption Entry` cce ON cce.name = c.consumption_entry\nWHERE c.status = 'Consumed'\n  AND cce.docstatus = 1\n  AND (%(from_date)s IS NULL OR DATE(c.consumed_on) >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR DATE(c.consumed_on) <= %(to_date)s)\n  AND (%(delivery_man)s IS NULL OR c.consumed_by_delivery_man = %(delivery_man)s)\n  AND (%(customer)s IS NULL OR b.customer = %(customer)s)\n  AND (%(booklet)s IS NULL OR c.booklet = %(booklet)s)\nORDER BY c.consumed_on DESC, c.name",
  "ref_doctype": "Purisol Coupon",
  "report_name": "Coupon Consumption Log",
- "report_type": "Query Report",
+ "report_type": "Script Report",
  "roles": [
   {
    "role": "Purisol Administrator"
